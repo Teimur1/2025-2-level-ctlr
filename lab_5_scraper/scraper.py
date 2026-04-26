@@ -126,6 +126,8 @@ class Crawler:
             config (Config): Configuration
         """
 
+        
+
     def _extract_url(self, article_bs: Tag) -> str:
         """
         Find and retrieve url from HTML.
