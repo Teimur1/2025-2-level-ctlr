@@ -56,7 +56,6 @@ class IncorrectVerifyError(Exception):
     Exception raised when verify_certificate or headless_mode is not a boolean value.
     """
 
-
 class Config:
     def __init__(self, path_to_config: pathlib.Path) -> None:
         """
