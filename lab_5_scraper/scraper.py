@@ -72,6 +72,8 @@ class Config:
         self._timeout = dto.timeout
         self._should_verify_certificate = dto.should_verify_certificate
 
+        self._headless_mode = dto.headless_mode
+
     def _extract_config_content(self) -> ConfigDTO:
         """
         Returns:
@@ -112,8 +114,9 @@ class Config:
         if not isinstance(dto.timeout, int) or dto.timeout < 0 or dto.timeout > 60:
             raise IncorrectTimeoutError("Timeout must be an integer between 0 and 60")
 
-        if not isinstance(dto.should_verify_certificate, bool):
-            raise IncorrectVerifyError("should_verify_certificate must be a boolean")
+        if not isinstance(dto.should_verify_certificate, bool) or \
+           not isinstance(dto.headless_mode, bool):
+            raise IncorrectVerifyError("should_verify_certificate and headless_mode must be boolean")
 
     def get_seed_urls(self) -> list[str]:
         """
@@ -162,6 +165,7 @@ class Config:
         Returns:
             bool: Whether to use headless mode or not
         """
+        return self._headless_mode
 
 def make_request(url: str, config: Config) -> requests.models.Response:
     """
